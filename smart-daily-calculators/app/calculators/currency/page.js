@@ -1,0 +1,55 @@
+'use client';
+import { useState } from 'react';
+import CalculatorPage from '@/components/CalculatorPage';
+import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
+import { useTheme } from '@/components/ThemeProvider';
+
+const RATES = {
+  USD: 1, EUR: 0.92, GBP: 0.79, INR: 83.12, JPY: 149.50,
+  AUD: 1.53, CAD: 1.36, CHF: 0.90, CNY: 7.24, SGD: 1.34,
+  AED: 3.67, MYR: 4.68,
+};
+
+export default function CurrencyConverter() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const [amount, setAmount] = useState('');
+  const [from, setFrom] = useState('USD');
+  const [to, setTo] = useState('INR');
+  const [result, setResult] = useState(null);
+
+  const opts = Object.keys(RATES).map(c => ({ value: c, label: c }));
+
+  const convert = () => {
+    const a = parseFloat(amount);
+    if (!a) return;
+    const inUSD = a / RATES[from];
+    const converted = inUSD * RATES[to];
+    setResult({ value: converted.toFixed(4), rate: (RATES[to] / RATES[from]).toFixed(6) });
+  };
+
+  return (
+    <CalculatorPage title="Currency Converter" emoji="💱" description="Convert between major world currencies with rates based on USD.">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <CalcInput id="currency-amount" label="Amount" placeholder="e.g. 100" value={amount}
+          onChange={e => setAmount(e.target.value)} />
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <CalcSelect id="from-currency" label="From" value={from}
+            onChange={e => { setFrom(e.target.value); setResult(null); }} options={opts} />
+          <CalcSelect id="to-currency" label="To" value={to}
+            onChange={e => { setTo(e.target.value); setResult(null); }} options={opts} />
+        </div>
+        <CalcButton id="convert-currency" onClick={convert}>Convert</CalcButton>
+        {result && (
+          <div>
+            <CalcResult label={`${amount} ${from} =`} value={`${result.value} ${to}`}
+              subtext={`1 ${from} = ${result.rate} ${to} (indicative rate)`} isDark={isDark} />
+            <p style={{ fontSize: '0.75rem', color: isDark ? '#334155' : '#94a3b8', marginTop: '0.75rem', textAlign: 'center' }}>
+              ⚠️ Rates are indicative. For live rates, use a bank or forex service.
+            </p>
+          </div>
+        )}
+      </div>
+    </CalculatorPage>
+  );
+}

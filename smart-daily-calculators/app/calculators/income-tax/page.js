@@ -1,0 +1,76 @@
+'use client';
+import { useState } from 'react';
+import CalculatorPage from '@/components/CalculatorPage';
+import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
+import { useTheme } from '@/components/ThemeProvider';
+
+export default function IncomeTaxCalculator() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  const [income, setIncome] = useState('');
+  const [regime, setRegime] = useState('new');
+  const [result, setResult] = useState(null);
+
+  const calculateNewRegime = (inc) => {
+    let tax = 0;
+    if (inc <= 300000) tax = 0;
+    else if (inc <= 700000) tax = (inc - 300000) * 0.05;
+    else if (inc <= 1000000) tax = 20000 + (inc - 700000) * 0.10;
+    else if (inc <= 1200000) tax = 50000 + (inc - 1000000) * 0.15;
+    else if (inc <= 1500000) tax = 80000 + (inc - 1200000) * 0.20;
+    else tax = 140000 + (inc - 1500000) * 0.30;
+    return tax;
+  };
+
+  const calculateOldRegime = (inc) => {
+    const taxable = inc - 250000;
+    if (taxable <= 0) return 0;
+    let tax = 0;
+    if (taxable <= 250000) tax = taxable * 0.05;
+    else if (taxable <= 750000) tax = 12500 + (taxable - 250000) * 0.20;
+    else tax = 112500 + (taxable - 750000) * 0.30;
+    return tax;
+  };
+
+  const calculate = () => {
+    const inc = parseFloat(income);
+    if (!inc || inc < 0) return;
+    const tax = regime === 'new' ? calculateNewRegime(inc) : calculateOldRegime(inc);
+    const cess = tax * 0.04;
+    const total = tax + cess;
+    const effective = ((total / inc) * 100).toFixed(2);
+    setResult({ tax: tax.toFixed(0), cess: cess.toFixed(0), total: total.toFixed(0), effective });
+  };
+
+  return (
+    <CalculatorPage title="Income Tax Calculator" emoji="💰" description="Estimate your Indian income tax under New or Old tax regime.">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <CalcSelect id="tax-regime" label="Tax Regime" value={regime} onChange={e => { setRegime(e.target.value); setResult(null); }}
+          options={[{ value: 'new', label: 'New Tax Regime (FY 2024-25)' }, { value: 'old', label: 'Old Tax Regime' }]} />
+        <CalcInput id="annual-income" label="Annual Income" placeholder="e.g. 800000" value={income}
+          onChange={e => setIncome(e.target.value)} unit="₹" />
+        <CalcButton id="calc-tax" onClick={calculate}>Calculate Income Tax</CalcButton>
+        {result && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <CalcResult label="Total Tax Payable (incl. cess)" value={`₹${parseInt(result.total).toLocaleString('en-IN')}`}
+              subtext={`Effective Tax Rate: ${result.effective}%`} isDark={isDark} />
+            <div style={{ padding: '1rem', borderRadius: 12,
+              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
+              border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}` }}>
+              {[
+                { label: 'Base Income Tax', val: `₹${parseInt(result.tax).toLocaleString('en-IN')}` },
+                { label: 'Health & Education Cess (4%)', val: `₹${parseInt(result.cess).toLocaleString('en-IN')}` },
+              ].map(row => (
+                <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  padding: '0.4rem 0', borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` }}>
+                  <span style={{ fontSize: '0.85rem', color: isDark ? '#94a3b8' : '#64748b' }}>{row.label}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: isDark ? '#e2e8f0' : '#1e293b' }}>{row.val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </CalculatorPage>
+  );
+}
