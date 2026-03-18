@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcButton, CalcResult } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function WorkHoursCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [entries, setEntries] = useState([
     { start: '09:00', end: '17:00', label: 'Monday' },
     { start: '09:00', end: '17:00', label: 'Tuesday' },
@@ -42,25 +40,25 @@ export default function WorkHoursCalculator() {
 
   const inputStyle = (isDark) => ({
     padding: '0.45rem 0.6rem', borderRadius: 8, fontSize: '0.85rem',
-    border: `1px solid ${isDark ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.15)'}`,
-    background: isDark ? 'rgba(255,255,255,0.04)' : '#f8fafc',
-    color: isDark ? '#e2e8f0' : '#1e293b', outline: 'none', width: '100%',
+    border: `1px solid ${'rgba(99,102,241,0.15)'}`,
+    background: 'var(--color-bg-main)',
+    color: 'var(--color-text-heading)', outline: 'none', width: '100%',
   });
 
   return (
     <CalculatorPage title="Work Hours Calculator" emoji="⏰" description="Track and total your work hours across multiple days or sessions.">
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <div style={{ borderRadius: 12, overflow: 'hidden',
-          border: `1px solid ${isDark ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)'}` }}>
-          <div style={{ background: isDark ? 'rgba(99,102,241,0.1)' : 'rgba(99,102,241,0.06)', padding: '0.6rem 1rem',
+          border: `1px solid ${'rgba(99,102,241,0.1)'}` }}>
+          <div style={{ background: 'var(--color-bg-secondary)', padding: '0.6rem 1rem',
             display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '0.5rem' }}>
             {['Label', 'Start', 'End', ''].map((h, i) => (
-              <span key={i} style={{ fontSize: '0.72rem', fontWeight: 600, color: isDark ? '#818cf8' : '#6366f1', textTransform: 'uppercase' }}>{h}</span>
+              <span key={i} style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase' }}>{h}</span>
             ))}
           </div>
           {entries.map((e, i) => (
             <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '0.5rem', padding: '0.5rem 1rem', alignItems: 'center',
-              borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` }}>
+              borderTop: `1px solid ${'var(--color-border)'}` }}>
               <input value={e.label} onChange={ev => updateEntry(i, 'label', ev.target.value)} style={inputStyle(isDark)} placeholder="Label" />
               <input type="time" value={e.start} onChange={ev => updateEntry(i, 'start', ev.target.value)} style={inputStyle(isDark)} />
               <input type="time" value={e.end} onChange={ev => updateEntry(i, 'end', ev.target.value)} style={inputStyle(isDark)} />
@@ -72,22 +70,22 @@ export default function WorkHoursCalculator() {
           ))}
         </div>
         <button onClick={addEntry} style={{ padding: '0.5rem', borderRadius: 8, background: 'transparent',
-          border: `1px dashed ${isDark ? 'rgba(99,102,241,0.3)' : 'rgba(99,102,241,0.2)'}`,
-          color: isDark ? '#818cf8' : '#6366f1', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}>
+          border: `1px dashed ${'rgba(99,102,241,0.2)'}`,
+          color: 'var(--color-primary)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}>
           + Add Time Entry
         </button>
         <CalcButton id="calc-work-hours" onClick={calculate}>Calculate Total Hours</CalcButton>
         {result && (
           <div>
             <CalcResult label="Total Work Hours" value={result.total}
-              subtext={`${result.totalMins} minutes total`} isDark={isDark} />
+              subtext={`${result.totalMins} minutes total`} />
             <div style={{ marginTop: '0.75rem', borderRadius: 10, overflow: 'hidden',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}` }}>
+              border: `1px solid ${'var(--color-bg-secondary)'}` }}>
               {result.detail.map((d, i) => (
                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 1rem',
-                  background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(99,102,241,0.02)',
-                  borderBottom: i < result.detail.length - 1 ? `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` : 'none' }}>
-                  <span style={{ fontSize: '0.85rem', color: isDark ? '#94a3b8' : '#64748b' }}>{d.label} ({d.start}–{d.end})</span>
+                  background: 'var(--color-bg-secondary)',
+                  borderBottom: i < result.detail.length - 1 ? `1px solid ${'var(--color-border)'}` : 'none' }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-body)' }}>{d.label} ({d.start}–{d.end})</span>
                   <span style={{ fontWeight: 600, color: '#818cf8', fontSize: '0.85rem' }}>{d.hours}h {d.mins}m</span>
                 </div>
               ))}

@@ -2,18 +2,16 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function BMICalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const [unit, setUnit] = useState('metric');
   const [result, setResult] = useState(null);
 
   const getCategory = (bmi) => {
-    if (bmi < 18.5) return { label: 'Underweight', color: '#06b6d4' };
+    if (bmi < 18.5) return { label: 'Underweight', color: 'var(--color-primary)' };
     if (bmi < 25) return { label: 'Normal weight ✅', color: '#22c55e' };
     if (bmi < 30) return { label: 'Overweight', color: '#f59e0b' };
     return { label: 'Obese', color: '#ef4444' };
@@ -50,7 +48,7 @@ export default function BMICalculator() {
         <CalcButton id="calc-bmi" onClick={calculate}>Calculate BMI</CalcButton>
         {result && (
           <div>
-            <CalcResult label="Your BMI" value={result.bmi} isDark={isDark} />
+            <CalcResult label="Your BMI" value={result.bmi} />
             <div style={{ marginTop: '0.75rem', padding: '0.9rem 1.25rem', borderRadius: 12,
               background: `${result.color}15`, border: `1px solid ${result.color}40`,
               display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -58,9 +56,9 @@ export default function BMICalculator() {
               <span style={{ color: result.color, fontWeight: 700, fontSize: '0.9rem' }}>{result.category}</span>
             </div>
             <div style={{ marginTop: '0.75rem', padding: '0.75rem', borderRadius: 10,
-              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(99,102,241,0.08)'}` }}>
-              <p style={{ fontSize: '0.75rem', color: isDark ? '#64748b' : '#94a3b8', textAlign: 'center' }}>
+              background: 'var(--color-bg-secondary)',
+              border: `1px solid ${'var(--color-bg-secondary)'}` }}>
+              <p style={{ fontSize: '0.75rem', color: 'var(--color-text-body)', textAlign: 'center' }}>
                 💡 BMI = Weight (kg) ÷ Height² (m) | Healthy range: 18.5 – 24.9
               </p>
             </div>

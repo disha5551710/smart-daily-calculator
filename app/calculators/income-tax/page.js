@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function IncomeTaxCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [income, setIncome] = useState('');
   const [regime, setRegime] = useState('new');
   const [result, setResult] = useState(null);
@@ -53,18 +51,18 @@ export default function IncomeTaxCalculator() {
         {result && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <CalcResult label="Total Tax Payable (incl. cess)" value={`₹${parseInt(result.total).toLocaleString('en-IN')}`}
-              subtext={`Effective Tax Rate: ${result.effective}%`} isDark={isDark} />
+              subtext={`Effective Tax Rate: ${result.effective}%`} />
             <div style={{ padding: '1rem', borderRadius: 12,
-              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}` }}>
+              background: 'var(--color-bg-secondary)',
+              border: `1px solid ${'var(--color-bg-secondary)'}` }}>
               {[
                 { label: 'Base Income Tax', val: `₹${parseInt(result.tax).toLocaleString('en-IN')}` },
                 { label: 'Health & Education Cess (4%)', val: `₹${parseInt(result.cess).toLocaleString('en-IN')}` },
               ].map(row => (
                 <div key={row.label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  padding: '0.4rem 0', borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` }}>
-                  <span style={{ fontSize: '0.85rem', color: isDark ? '#94a3b8' : '#64748b' }}>{row.label}</span>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: isDark ? '#e2e8f0' : '#1e293b' }}>{row.val}</span>
+                  padding: '0.4rem 0', borderBottom: `1px solid ${'var(--color-border)'}` }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-body)' }}>{row.label}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>{row.val}</span>
                 </div>
               ))}
             </div>

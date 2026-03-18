@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcButton, CalcResult } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function AgeDifferenceCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [date1, setDate1] = useState('');
   const [date2, setDate2] = useState('');
   const [result, setResult] = useState(null);
@@ -28,9 +26,9 @@ export default function AgeDifferenceCalculator() {
 
   const inputStyle = (isDark) => ({
     width: '100%', padding: '0.7rem 0.9rem', borderRadius: 10,
-    border: `1.5px solid ${isDark ? 'rgba(99,102,241,0.25)' : 'rgba(99,102,241,0.2)'}`,
-    background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(248,250,252,0.8)',
-    color: isDark ? '#e2e8f0' : '#1e293b',
+    border: `1.5px solid ${'rgba(99,102,241,0.2)'}`,
+    background: 'rgba(248,250,252,0.8)',
+    color: 'var(--color-text-heading)',
     fontSize: '0.95rem', outline: 'none', fontFamily: 'Inter, sans-serif',
   });
 
@@ -39,7 +37,7 @@ export default function AgeDifferenceCalculator() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         {[['date1', 'Date / Birthday 1', date1, setDate1], ['date2', 'Date / Birthday 2', date2, setDate2]].map(([id, label, val, setter]) => (
           <div key={id} style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-            <label htmlFor={id} style={{ fontSize: '0.8rem', fontWeight: 600, color: isDark ? '#94a3b8' : '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <label htmlFor={id} style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--color-text-body)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               {label}
             </label>
             <input id={id} type="date" value={val} onChange={e => setter(e.target.value)} style={inputStyle(isDark)} />
@@ -51,7 +49,7 @@ export default function AgeDifferenceCalculator() {
             <CalcResult label="Age Difference"
               value={`${result.years}y ${result.months}m ${result.days}d`}
               subtext={`${result.totalDays.toLocaleString()} days • ${result.totalWeeks.toLocaleString()} weeks`}
-              isDark={isDark} />
+              />
           </div>
         )}
       </div>

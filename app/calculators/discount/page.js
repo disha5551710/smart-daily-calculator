@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function DiscountCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [price, setPrice] = useState('');
   const [discount, setDiscount] = useState('');
   const [result, setResult] = useState(null);
@@ -31,7 +29,7 @@ export default function DiscountCalculator() {
         {result && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <CalcResult label="Final Price After Discount" value={`₹${result.final}`}
-              subtext={`You save ₹${result.saved}!`} isDark={isDark} />
+              subtext={`You save ₹${result.saved}!`} />
             <div style={{ padding: '0.75rem 1rem', borderRadius: 10,
               background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)',
               display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

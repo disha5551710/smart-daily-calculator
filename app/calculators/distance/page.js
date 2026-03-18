@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function DistanceCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [speed, setSpeed] = useState('');
   const [time, setTime] = useState('');
   const [speedUnit, setSpeedUnit] = useState('kmh');
@@ -38,11 +36,11 @@ export default function DistanceCalculator() {
         {result && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             <CalcResult label="Distance Traveled" value={`${result.km} km`}
-              subtext={`${result.miles} miles • ${parseInt(result.meters).toLocaleString()} meters`} isDark={isDark} />
+              subtext={`${result.miles} miles • ${parseInt(result.meters).toLocaleString()} meters`} />
             <div style={{ padding: '0.6rem 1rem', borderRadius: 10,
-              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}` }}>
-              <p style={{ fontSize: '0.75rem', color: isDark ? '#64748b' : '#94a3b8', textAlign: 'center' }}>
+              background: 'var(--color-bg-secondary)',
+              border: `1px solid ${'var(--color-bg-secondary)'}` }}>
+              <p style={{ fontSize: '0.75rem', color: 'var(--color-text-body)', textAlign: 'center' }}>
                 💡 Distance = Speed × Time
               </p>
             </div>

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 const RATES = {
   USD: 1, EUR: 0.92, GBP: 0.79, INR: 83.12, JPY: 149.50,
@@ -11,8 +11,6 @@ const RATES = {
 };
 
 export default function CurrencyConverter() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [amount, setAmount] = useState('');
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('INR');
@@ -43,8 +41,8 @@ export default function CurrencyConverter() {
         {result && (
           <div>
             <CalcResult label={`${amount} ${from} =`} value={`${result.value} ${to}`}
-              subtext={`1 ${from} = ${result.rate} ${to} (indicative rate)`} isDark={isDark} />
-            <p style={{ fontSize: '0.75rem', color: isDark ? '#334155' : '#94a3b8', marginTop: '0.75rem', textAlign: 'center' }}>
+              subtext={`1 ${from} = ${result.rate} ${to} (indicative rate)`} />
+            <p style={{ fontSize: '0.75rem', color: 'var(--color-text-body)', marginTop: '0.75rem', textAlign: 'center' }}>
               ⚠️ Rates are indicative. For live rates, use a bank or forex service.
             </p>
           </div>

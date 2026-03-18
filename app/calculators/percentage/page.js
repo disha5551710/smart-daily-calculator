@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function PercentageCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [mode, setMode] = useState('percent-of');
   const [a, setA] = useState('');
   const [b, setB] = useState('');
@@ -45,7 +43,7 @@ export default function PercentageCalculator() {
           unit={mode === 'percent-of' ? '%' : ''} />
         <CalcInput id="pct-b" label={labels[mode][1]} placeholder="Enter value" value={b} onChange={e => setB(e.target.value)} />
         <CalcButton id="calc-pct" onClick={calculate}>Calculate</CalcButton>
-        {result && <CalcResult label={result.label} value={result.value} isDark={isDark} />}
+        {result && <CalcResult label={result.label} value={result.value} />}
       </div>
     </CalculatorPage>
   );

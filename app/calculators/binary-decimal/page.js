@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function BinaryDecimalConverter() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [mode, setMode] = useState('bin2dec');
   const [input, setInput] = useState('');
   const [result, setResult] = useState(null);
@@ -39,16 +37,16 @@ export default function BinaryDecimalConverter() {
         <CalcButton id="convert-binary" onClick={convert}>Convert</CalcButton>
         {result && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-            <CalcResult label={mode === 'bin2dec' ? 'Decimal Value' : 'Binary Value'} value={result.main} isDark={isDark} />
+            <CalcResult label={mode === 'bin2dec' ? 'Decimal Value' : 'Binary Value'} value={result.main} />
             {[
               { label: 'Hexadecimal', val: '0x' + result.hex },
               { label: 'Octal', val: '0o' + result.octal },
             ].map(row => (
               <div key={row.label} style={{ padding: '0.75rem 1rem', borderRadius: 10,
-                background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
-                border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}`,
+                background: 'var(--color-bg-secondary)',
+                border: `1px solid ${'var(--color-bg-secondary)'}`,
                 display: 'flex', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.85rem', color: isDark ? '#64748b' : '#94a3b8' }}>{row.label}</span>
+                <span style={{ fontSize: '0.85rem', color: 'var(--color-text-body)' }}>{row.label}</span>
                 <span style={{ fontSize: '0.85rem', fontWeight: 600, fontFamily: 'monospace', color: '#818cf8' }}>{row.val}</span>
               </div>
             ))}

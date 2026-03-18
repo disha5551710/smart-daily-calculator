@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function SavingsCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [monthly, setMonthly] = useState('');
   const [months, setMonths] = useState('');
   const [rate, setRate] = useState('0');
@@ -41,18 +39,18 @@ export default function SavingsCalculator() {
         {result && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <CalcResult label="Total Savings" value={`₹${parseFloat(result.total).toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}
-              subtext={`Over ${months} months`} isDark={isDark} />
+              subtext={`Over ${months} months`} />
             <div style={{ padding: '1rem', borderRadius: 12,
-              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}` }}>
+              background: 'var(--color-bg-secondary)',
+              border: `1px solid ${'var(--color-bg-secondary)'}` }}>
               {[
                 ['Principal (Deposits)', `₹${parseFloat(result.principal).toLocaleString('en-IN')}`],
                 ['Interest Earned', `₹${parseFloat(result.interest).toLocaleString('en-IN')}`],
               ].map(([k, v]) => (
                 <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0',
-                  borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` }}>
-                  <span style={{ fontSize: '0.85rem', color: isDark ? '#94a3b8' : '#64748b' }}>{k}</span>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: isDark ? '#e2e8f0' : '#1e293b' }}>{v}</span>
+                  borderBottom: `1px solid ${'var(--color-border)'}` }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-body)' }}>{k}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>{v}</span>
                 </div>
               ))}
             </div>

@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function ProfitCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [cost, setCost] = useState('');
   const [sell, setSell] = useState('');
   const [result, setResult] = useState(null);
@@ -34,7 +32,7 @@ export default function ProfitCalculator() {
             <CalcResult label={result.isLoss ? 'Loss Amount' : 'Profit Amount'}
               value={`₹${result.profit}`}
               subtext={`${result.percentage}% ${result.isLoss ? 'loss' : 'profit margin'}`}
-              isDark={isDark} />
+              />
             <div style={{ padding: '0.75rem 1.25rem', borderRadius: 12,
               background: result.isLoss ? 'rgba(239,68,68,0.1)' : 'rgba(34,197,94,0.1)',
               border: `1px solid ${result.isLoss ? 'rgba(239,68,68,0.25)' : 'rgba(34,197,94,0.25)'}`,
@@ -44,7 +42,7 @@ export default function ProfitCalculator() {
                 <p style={{ fontWeight: 700, color: result.isLoss ? '#ef4444' : '#22c55e', fontSize: '0.95rem' }}>
                   {result.isLoss ? 'LOSS' : 'PROFIT'} of {result.percentage}%
                 </p>
-                <p style={{ fontSize: '0.8rem', color: isDark ? '#64748b' : '#94a3b8' }}>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-text-body)' }}>
                   SP ₹{result.sell} − CP ₹{result.cost} = {result.isLoss ? '−' : '+'}₹{result.profit}
                 </p>
               </div>

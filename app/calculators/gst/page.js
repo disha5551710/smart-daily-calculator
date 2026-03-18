@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton, CalcResult, CalcSelect } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function GSTCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [amount, setAmount] = useState('');
   const [rate, setRate] = useState('18');
   const [mode, setMode] = useState('exclusive');
@@ -44,19 +42,19 @@ export default function GSTCalculator() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             <CalcResult label={mode === 'exclusive' ? 'Total Price (with GST)' : 'Original Price (before GST)'}
               value={`₹${mode === 'exclusive' ? result.total : result.originalPrice}`}
-              subtext={`GST Amount: ₹${result.gst}`} isDark={isDark} />
+              subtext={`GST Amount: ₹${result.gst}`} />
             <div style={{ padding: '1rem', borderRadius: 12,
-              background: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(99,102,241,0.04)',
-              border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(99,102,241,0.08)'}` }}>
+              background: 'var(--color-bg-secondary)',
+              border: `1px solid ${'var(--color-bg-secondary)'}` }}>
               {[
                 ['CGST (' + rate / 2 + '%)', `₹${result.cgst}`],
                 ['SGST (' + rate / 2 + '%)', `₹${result.sgst}`],
                 ['Total GST (' + rate + '%)', `₹${result.gst}`],
               ].map(([k, v]) => (
                 <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0',
-                  borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` }}>
-                  <span style={{ fontSize: '0.85rem', color: isDark ? '#94a3b8' : '#64748b' }}>{k}</span>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: isDark ? '#e2e8f0' : '#1e293b' }}>{v}</span>
+                  borderBottom: `1px solid ${'var(--color-border)'}` }}>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-text-body)' }}>{k}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-heading)' }}>{v}</span>
                 </div>
               ))}
             </div>

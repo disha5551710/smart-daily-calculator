@@ -2,11 +2,9 @@
 import { useState } from 'react';
 import CalculatorPage from '@/components/CalculatorPage';
 import { CalcInput, CalcButton } from '@/components/CalcUI';
-import { useTheme } from '@/components/ThemeProvider';
+
 
 export default function IngredientRatioCalculator() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
   const [ingredients, setIngredients] = useState([
     { name: 'Flour', amount: '200' },
     { name: 'Sugar', amount: '100' },
@@ -45,50 +43,50 @@ export default function IngredientRatioCalculator() {
             value={newServings} onChange={e => setNewServings(e.target.value)} />
         </div>
 
-        <div style={{ border: `1px solid ${isDark ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)'}`, borderRadius: 12, overflow: 'hidden' }}>
-          <div style={{ background: isDark ? 'rgba(99,102,241,0.1)' : 'rgba(99,102,241,0.06)', padding: '0.6rem 1rem',
+        <div style={{ border: `1px solid ${'rgba(99,102,241,0.1)'}`, borderRadius: 12, overflow: 'hidden' }}>
+          <div style={{ background: 'var(--color-bg-secondary)', padding: '0.6rem 1rem',
             display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isDark ? '#818cf8' : '#6366f1', textTransform: 'uppercase' }}>Ingredient</span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: isDark ? '#818cf8' : '#6366f1', textTransform: 'uppercase' }}>Amount (g/ml)</span>
+            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase' }}>Ingredient</span>
+            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase' }}>Amount (g/ml)</span>
           </div>
           {ingredients.map((ing, i) => (
             <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', padding: '0.5rem 1rem',
-              borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'}` }}>
+              borderTop: `1px solid ${'var(--color-border)'}` }}>
               <input placeholder="Name" value={ing.name} onChange={e => updateIngredient(i, 'name', e.target.value)}
-                style={{ padding: '0.5rem 0.75rem', borderRadius: 8, background: isDark ? 'rgba(255,255,255,0.05)' : '#f8fafc',
-                  border: `1px solid ${isDark ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.15)'}`,
-                  color: isDark ? '#e2e8f0' : '#1e293b', fontSize: '0.875rem', outline: 'none' }} />
+                style={{ padding: '0.5rem 0.75rem', borderRadius: 8, background: 'var(--color-bg-main)',
+                  border: `1px solid ${'rgba(99,102,241,0.15)'}`,
+                  color: 'var(--color-text-heading)', fontSize: '0.875rem', outline: 'none' }} />
               <input type="number" placeholder="Amount" value={ing.amount} onChange={e => updateIngredient(i, 'amount', e.target.value)}
-                style={{ padding: '0.5rem 0.75rem', borderRadius: 8, background: isDark ? 'rgba(255,255,255,0.05)' : '#f8fafc',
-                  border: `1px solid ${isDark ? 'rgba(99,102,241,0.2)' : 'rgba(99,102,241,0.15)'}`,
-                  color: isDark ? '#e2e8f0' : '#1e293b', fontSize: '0.875rem', outline: 'none' }} />
+                style={{ padding: '0.5rem 0.75rem', borderRadius: 8, background: 'var(--color-bg-main)',
+                  border: `1px solid ${'rgba(99,102,241,0.15)'}`,
+                  color: 'var(--color-text-heading)', fontSize: '0.875rem', outline: 'none' }} />
             </div>
           ))}
         </div>
 
         <button onClick={addIngredient} style={{ padding: '0.5rem', borderRadius: 8, background: 'transparent',
-          border: `1px dashed ${isDark ? 'rgba(99,102,241,0.3)' : 'rgba(99,102,241,0.2)'}`,
-          color: isDark ? '#818cf8' : '#6366f1', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}>
+          border: `1px dashed ${'rgba(99,102,241,0.2)'}`,
+          color: 'var(--color-primary)', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 600 }}>
           + Add Ingredient
         </button>
         <CalcButton id="scale-recipe" onClick={calculate}>Scale Recipe</CalcButton>
 
         {results.length > 0 && (
           <div style={{ borderRadius: 12, overflow: 'hidden',
-            background: 'linear-gradient(135deg, rgba(99,102,241,0.1), rgba(6,182,212,0.08))',
+            background: 'var(--color-accent-light)',
             border: '1px solid rgba(99,102,241,0.25)', animation: 'fadeInUp 0.4s ease' }}>
             <div style={{ padding: '0.75rem 1rem', borderBottom: '1px solid rgba(99,102,241,0.2)',
               display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontWeight: 700, color: '#818cf8', fontSize: '0.9rem' }}>Scaled Ingredients</span>
-              <span style={{ fontSize: '0.8rem', color: isDark ? '#64748b' : '#94a3b8' }}>for {newServings} servings</span>
+              <span style={{ fontSize: '0.8rem', color: 'var(--color-text-body)' }}>for {newServings} servings</span>
             </div>
             {results.map((r, i) => (
               <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6rem 1rem',
                 borderBottom: i < results.length - 1 ? '1px solid rgba(99,102,241,0.1)' : 'none' }}>
-                <span style={{ color: isDark ? '#e2e8f0' : '#1e293b', fontSize: '0.9rem' }}>{r.name}</span>
+                <span style={{ color: 'var(--color-text-heading)', fontSize: '0.9rem' }}>{r.name}</span>
                 <div style={{ textAlign: 'right' }}>
                   <span style={{ fontWeight: 700, color: '#818cf8', fontFamily: 'Space Grotesk', fontSize: '1rem' }}>{r.scaled}</span>
-                  <span style={{ color: isDark ? '#475569' : '#94a3b8', fontSize: '0.75rem', marginLeft: '0.25rem' }}>
+                  <span style={{ color: 'var(--color-text-body)', fontSize: '0.75rem', marginLeft: '0.25rem' }}>
                     (orig: {r.original})
                   </span>
                 </div>

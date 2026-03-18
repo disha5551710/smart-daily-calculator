@@ -1,15 +1,12 @@
 'use client';
-import { useTheme } from '@/components/ThemeProvider';
+
 import Link from 'next/link';
 
 export default function AboutClient() {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   return (
     <div style={{
       paddingTop: '90px', paddingBottom: '4rem',
-      background: isDark ? 'linear-gradient(135deg, #0a0a0f, #0d0b1e)' : '#f8fafc',
+      background: 'var(--color-bg-main)',
       minHeight: '100vh',
     }}>
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 1.5rem' }}>
@@ -17,13 +14,14 @@ export default function AboutClient() {
           <h1 style={{
             fontFamily: 'Space Grotesk, sans-serif', fontWeight: 900,
             fontSize: 'clamp(2rem, 5vw, 3rem)',
-            background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
+            background: 'linear-gradient(135deg, var(--color-primary) 0%, #06b6d4 100%)',
+            backgroundSize: '200% auto',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             marginBottom: '0.75rem',
           }}>
             About Smart Daily Calculators
           </h1>
-          <p style={{ color: isDark ? '#64748b' : '#94a3b8', fontSize: '1rem', lineHeight: 1.7 }}>
+          <p style={{ color: 'var(--color-text-body)', fontSize: '1rem', lineHeight: 1.7 }}>
             A modern platform designed to make everyday calculations effortless.
           </p>
         </div>
@@ -47,8 +45,8 @@ export default function AboutClient() {
           },
         ].map((section, i) => (
           <div key={section.title} style={{
-            background: isDark ? 'rgba(255,255,255,0.03)' : 'white',
-            border: `1px solid ${isDark ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.1)'}`,
+            background: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
             borderRadius: 16, padding: '1.75rem',
             marginBottom: '1.25rem',
             animation: `fadeInUp 0.5s ease ${i * 100}ms both`,
@@ -57,12 +55,12 @@ export default function AboutClient() {
               <span style={{ fontSize: '1.5rem' }}>{section.emoji}</span>
               <h2 style={{
                 fontFamily: 'Space Grotesk, sans-serif', fontWeight: 700,
-                fontSize: '1.1rem', color: isDark ? '#e2e8f0' : '#1e293b',
+                fontSize: '1.1rem', color: 'var(--color-text-heading)',
               }}>
                 {section.title}
               </h2>
             </div>
-            <p style={{ color: isDark ? '#64748b' : '#64748b', lineHeight: 1.8, fontSize: '0.9rem' }}>
+            <p style={{ color: 'var(--color-text-body)', lineHeight: 1.8, fontSize: '0.9rem' }}>
               {section.content}
             </p>
           </div>
@@ -72,10 +70,20 @@ export default function AboutClient() {
           <Link href="/" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             padding: '0.8rem 2rem', borderRadius: 12,
-            background: 'linear-gradient(135deg, #6366f1, #4f46e5)',
+            background: 'var(--color-primary)',
             color: '#fff', textDecoration: 'none', fontWeight: 700,
-            fontSize: '0.9rem', boxShadow: '0 6px 20px rgba(99,102,241,0.35)',
+            fontSize: '0.9rem', boxShadow: '0 4px 14px 0 rgba(20, 184, 166, 0.39)',
             transition: 'all 0.2s',
+          }}
+          onMouseEnter={e => {
+            e.target.style.background = 'var(--color-primary-hover)';
+            e.target.style.transform = 'translateY(-2px)';
+            e.target.style.boxShadow = '0 6px 20px rgba(20, 184, 166, 0.4)';
+          }}
+          onMouseLeave={e => {
+            e.target.style.background = 'var(--color-primary)';
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = '0 4px 14px 0 rgba(20, 184, 166, 0.39)';
           }}>
             🧮 Explore Calculators →
           </Link>
