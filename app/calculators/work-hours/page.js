@@ -46,7 +46,19 @@ export default function WorkHoursCalculator() {
   };
 
   return (
-    <CalculatorPage title="Work Hours Calculator" emoji="⏰" description="Track and total your work hours across multiple days or sessions.">
+    <CalculatorPage 
+      title="Work Hours Calculator" 
+      emoji="⏰" 
+      description="Track and total your work hours across multiple days or sessions."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Select a <strong>Start Time</strong> and an <strong>End Time</strong> for a work session.</li>
+          <li><strong>Step 2:</strong> Enter how many minutes of <strong>Break</strong> you took.</li>
+          <li><strong>Step 3:</strong> Click <strong>+ Add Session</strong> to keep racking up your work logged time.</li>
+          <li><strong>Step 4:</strong> Click <strong>Calculate Total Hours</strong> and review the summary of accumulated hours.</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <div style={{ borderRadius: 12, overflow: 'hidden',
           border: '1px solid var(--color-border)' }}>

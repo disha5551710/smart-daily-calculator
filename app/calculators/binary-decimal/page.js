@@ -25,7 +25,18 @@ export default function BinaryDecimalConverter() {
   };
 
   return (
-    <CalculatorPage title="Binary ↔ Decimal Converter" emoji="💻" description="Convert between binary, decimal, hexadecimal, and octal number systems.">
+    <CalculatorPage 
+      title="Binary / Decimal / Hex Converter" 
+      emoji="💻" 
+      description="Convert between Binary, Decimal, and Hexadecimal number systems."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter a value in any of the fields: <strong>Binary</strong>, <strong>Decimal</strong>, or <strong>Hexadecimal</strong>.</li>
+          <li><strong>Step 2:</strong> The calculator instantly converts the value across all three numbering systems in real-time.</li>
+          <li><strong>Step 3:</strong> Copy your converted values as needed!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcSelect id="conv-mode" label="Conversion Mode" value={mode}
           onChange={e => { setMode(e.target.value); setResult(null); setError(''); }}

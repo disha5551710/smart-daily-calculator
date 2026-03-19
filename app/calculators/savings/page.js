@@ -27,7 +27,19 @@ export default function SavingsCalculator() {
   };
 
   return (
-    <CalculatorPage title="Savings Calculator" emoji="🐷" description="Project your total savings over time with optional compound interest.">
+    <CalculatorPage 
+      title="Savings Calculator" 
+      emoji="🐷" 
+      description="Project your total savings over time with optional compound interest."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter your <strong>Initial Deposit</strong>.</li>
+          <li><strong>Step 2:</strong> Enter your regular <strong>Monthly Contribution</strong>.</li>
+          <li><strong>Step 3:</strong> Supply the annual <strong>Interest Rate (%)</strong> and your planned <strong>Years to Save</strong>.</li>
+          <li><strong>Step 4:</strong> Click <strong>Calculate Savings</strong> to see how much your savings will grow over time!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="monthly-saving" label="Monthly Saving Amount" placeholder="e.g. 5000" value={monthly}
           onChange={e => setMonthly(e.target.value)} unit="₹" />

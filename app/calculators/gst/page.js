@@ -28,7 +28,19 @@ export default function GSTCalculator() {
   };
 
   return (
-    <CalculatorPage title="GST Calculator" emoji="🧾" description="Calculate GST inclusive or exclusive prices for any GST rate slab.">
+    <CalculatorPage 
+      title="GST Calculator" 
+      emoji="🧾" 
+      description="Calculate GST inclusive or exclusive prices for any GST rate slab."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter the <strong>Initial Amount</strong>.</li>
+          <li><strong>Step 2:</strong> Enter the <strong>GST Rate</strong> percentage (e.g. 5, 12, 18 or 28).</li>
+          <li><strong>Step 3:</strong> Click <strong>Add GST</strong> if the price excludes GST, or <strong>Remove GST</strong> if the price already includes it.</li>
+          <li><strong>Step 4:</strong> Check out the resulting Net Amount, Total GST, and the Gross Amount below!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcSelect id="gst-mode" label="Calculation Mode" value={mode}
           onChange={e => { setMode(e.target.value); setResult(null); }}

@@ -20,7 +20,19 @@ export default function ProfitCalculator() {
   };
 
   return (
-    <CalculatorPage title="Profit Calculator" emoji="📈" description="Calculate profit or loss and profit percentage for any business transaction.">
+    <CalculatorPage 
+      title="Profit Calculator" 
+      emoji="📈" 
+      description="Calculate profit or loss and profit percentage for any business transaction."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter the <strong>Cost Price</strong> (the amount you paid to acquire an item or service).</li>
+          <li><strong>Step 2:</strong> Enter the <strong>Selling Price</strong> (the amount you sold the item or service for).</li>
+          <li><strong>Step 3:</strong> Click <strong>Calculate Profit/Loss</strong>.</li>
+          <li><strong>Step 4:</strong> Check whether you made a Profit or incurred a Loss, along with your profit/loss percentages!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="cost-price" label="Cost Price (CP)" placeholder="e.g. 500" value={cost}
           onChange={e => setCost(e.target.value)} unit="₹" />

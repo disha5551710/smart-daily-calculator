@@ -34,7 +34,20 @@ export default function IngredientRatioCalculator() {
   };
 
   return (
-    <CalculatorPage title="Ingredient Ratio Calculator" emoji="🍳" description="Scale recipe ingredients up or down based on number of servings.">
+    <CalculatorPage 
+      title="Ingredient Ratio Calculator" 
+      emoji="🍳" 
+      description="Scale recipe ingredients up or down based on number of servings."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter the <strong>original servings</strong> the recipe makes (e.g., 4).</li>
+          <li><strong>Step 2:</strong> Enter the <strong>new servings</strong> you want to make (e.g., 10).</li>
+          <li><strong>Step 3:</strong> Input the name and amount for each ingredient. You can use any unit (grams, cups, etc.)—the ratio works exactly the same!</li>
+          <li><strong>Step 4:</strong> Click <strong>+ Add Ingredient</strong> to add more items.</li>
+          <li><strong>Step 5:</strong> Click <strong>Scale Recipe</strong>. The calculator will automatically adjust all ingredient amounts according to the new serving size!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           <CalcInput id="orig-servings" label="Original Servings" placeholder="e.g. 4"

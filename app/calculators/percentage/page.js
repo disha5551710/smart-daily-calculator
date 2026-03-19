@@ -36,7 +36,18 @@ export default function PercentageCalculator() {
   };
 
   return (
-    <CalculatorPage title="Percentage Calculator" emoji="📊" description="Calculate percentages, find what percent of a number, or compute percentage change.">
+    <CalculatorPage 
+      title="Percentage Calculator" 
+      emoji="📊" 
+      description="Calculate percentages, find what percent of a number, or compute percentage change."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Select what you want to calculate: <strong>X% of Y</strong>, <strong>X is what % of Y</strong>, or <strong>% increase/decrease</strong>.</li>
+          <li><strong>Step 2:</strong> Enter the relevant values into the fields below.</li>
+          <li><strong>Step 3:</strong> Click <strong>Calculate Percentage</strong> to view the answer effortlessly.</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcSelect id="pct-mode" label="Calculation Mode" value={mode} onChange={e => { setMode(e.target.value); setResult(null); }} options={modes} />
         <CalcInput id="pct-a" label={labels[mode][0]} placeholder="Enter value" value={a} onChange={e => setA(e.target.value)}

@@ -21,7 +21,19 @@ export default function DistanceCalculator() {
   };
 
   return (
-    <CalculatorPage title="Distance Calculator" emoji="📍" description="Calculate distance traveled using speed and time with unit conversion.">
+    <CalculatorPage 
+      title="Distance Calculator" 
+      emoji="📍" 
+      description="Calculate distance traveled using speed and time with unit conversion."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter your <strong>Speed</strong> and select the unit (km/h or mph).</li>
+          <li><strong>Step 2:</strong> Enter the <strong>Time</strong> and select its unit (hours, minutes, seconds).</li>
+          <li><strong>Step 3:</strong> Select your preferred <strong>Distance Unit</strong> (km, miles, meters, etc.).</li>
+          <li><strong>Step 4:</strong> Click <strong>Calculate Distance</strong> to get the result!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: '0.75rem', alignItems: 'end' }}>
           <CalcInput id="speed-input" label="Speed" placeholder="e.g. 60" value={speed}

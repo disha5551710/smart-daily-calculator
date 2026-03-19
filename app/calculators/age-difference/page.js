@@ -26,7 +26,19 @@ export default function AgeDifferenceCalculator() {
 
 
   return (
-    <CalculatorPage title="Age Difference Calculator" emoji="🎂" description="Find the exact age difference between two dates or birthdays.">
+    <CalculatorPage 
+      title="Age Difference Calculator" 
+      emoji="🎂" 
+      description="Find the exact age difference between two dates or birthdays."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Select the <strong>Date / Birthday 1</strong>.</li>
+          <li><strong>Step 2:</strong> Select the <strong>Date / Birthday 2</strong>.</li>
+          <li><strong>Step 3:</strong> Click on <strong>Calculate Difference</strong>.</li>
+          <li><strong>Step 4:</strong> View the exact age difference in years, months, and days, along with total days and weeks!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="date1" type="date" label="Date / Birthday 1" value={date1} onChange={e => setDate1(e.target.value)} />
         <CalcInput id="date2" type="date" label="Date / Birthday 2" value={date2} onChange={e => setDate2(e.target.value)} />

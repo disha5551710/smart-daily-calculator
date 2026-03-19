@@ -27,7 +27,19 @@ export default function CurrencyConverter() {
   };
 
   return (
-    <CalculatorPage title="Currency Converter" emoji="💱" description="Convert between major world currencies with rates based on USD.">
+    <CalculatorPage 
+      title="Currency Converter" 
+      emoji="💱" 
+      description="Quickly convert amounts between two currencies using an exchange rate."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Provide the <strong>Exchange Rate</strong> (how much 1 unit of the "From" currency is worth in the "To" currency).</li>
+          <li><strong>Step 2:</strong> Enter the <strong>Amount to convert</strong>.</li>
+          <li><strong>Step 3:</strong> Click <strong>Convert</strong>.</li>
+          <li><strong>Step 4:</strong> The final converted amount will be displayed below!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="currency-amount" label="Amount" placeholder="e.g. 100" value={amount}
           onChange={e => setAmount(e.target.value)} />

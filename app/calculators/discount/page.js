@@ -19,7 +19,19 @@ export default function DiscountCalculator() {
   };
 
   return (
-    <CalculatorPage title="Discount Calculator" emoji="🏷️" description="Find the final price after applying a percentage discount.">
+    <CalculatorPage 
+      title="Discount Calculator" 
+      emoji="🏷️" 
+      description="Find the final price after applying a percentage discount."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter the <strong>Original Price</strong> of the item.</li>
+          <li><strong>Step 2:</strong> Enter the <strong>Discount Percentage</strong> offered.</li>
+          <li><strong>Step 3:</strong> Click <strong>Calculate Final Price</strong>.</li>
+          <li><strong>Step 4:</strong> Check out the Final Price and how much you saved!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="orig-price" label="Original Price" placeholder="e.g. 2999" value={price}
           onChange={e => setPrice(e.target.value)} unit="₹" />

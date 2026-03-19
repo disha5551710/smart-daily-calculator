@@ -41,7 +41,19 @@ export default function IncomeTaxCalculator() {
   };
 
   return (
-    <CalculatorPage title="Income Tax Calculator" emoji="💰" description="Estimate your Indian income tax under New or Old tax regime.">
+    <CalculatorPage 
+      title="Income Tax Calculator" 
+      emoji="💰" 
+      description="Estimate your Indian income tax under New or Old tax regime."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter your total <strong>Annual Income</strong>.</li>
+          <li><strong>Step 2:</strong> Enter any <strong>Deductions</strong> (e.g. Section 80C, 80D, standard deduction).</li>
+          <li><strong>Step 3:</strong> Select whether you want to calculate exactly according to the <strong>New Regime</strong> or <strong>Old Regime</strong>.</li>
+          <li><strong>Step 4:</strong> Click <strong>Calculate Tax</strong> to view your estimated taxable income and estimated tax liability!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcSelect id="tax-regime" label="Tax Regime" value={regime} onChange={e => { setRegime(e.target.value); setResult(null); }}
           options={[{ value: 'new', label: 'New Tax Regime (FY 2024-25)' }, { value: 'old', label: 'Old Tax Regime' }]} />

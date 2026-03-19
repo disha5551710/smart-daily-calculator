@@ -17,7 +17,19 @@ export default function RentCalculator() {
   };
 
   return (
-    <CalculatorPage title="Rent Calculator" emoji="🏠" description="Split rent fairly between roommates or calculate per-person cost.">
+    <CalculatorPage 
+      title="Rent Calculator" 
+      emoji="🏠" 
+      description="Split rent fairly between roommates or calculate per-person cost."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter the <strong>Total Rent Amount</strong> (e.g. 15000).</li>
+          <li><strong>Step 2:</strong> Specify the <strong>Number of People</strong>/roommates sharing the rent.</li>
+          <li><strong>Step 3:</strong> Optional: You can list their names to see individualized portions.</li>
+          <li><strong>Step 4:</strong> Click <strong>Calculate Shares</strong> to easily split the cost equally!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="total-rent" label="Total Monthly Rent" placeholder="e.g. 25000" value={totalRent}
           onChange={e => setTotalRent(e.target.value)} unit="₹" />

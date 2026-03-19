@@ -35,7 +35,19 @@ export default function BMICalculator() {
   };
 
   return (
-    <CalculatorPage title="BMI Calculator" emoji="⚖️" description="Calculate your Body Mass Index and check your weight health category.">
+    <CalculatorPage 
+      title="BMI Calculator" 
+      emoji="⚖️" 
+      description="Calculate Body Mass Index (BMI) and determine weight category."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter your <strong>Weight</strong> in kilograms (kg).</li>
+          <li><strong>Step 2:</strong> Enter your <strong>Height</strong> in centimeters (cm).</li>
+          <li><strong>Step 3:</strong> Click <strong>Calculate BMI</strong> to get your result.</li>
+          <li><strong>Step 4:</strong> The calculator will show your BMI value and indicate your weight category (Underweight, Normal, Overweight, or Obese).</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcSelect id="bmi-unit" label="Unit System" value={unit} onChange={e => { setUnit(e.target.value); setResult(null); }}
           options={[{ value: 'metric', label: 'Metric (kg, cm)' }, { value: 'imperial', label: 'Imperial (lbs, inches)' }]} />

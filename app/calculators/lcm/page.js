@@ -19,7 +19,18 @@ export default function LCMCalculator() {
   };
 
   return (
-    <CalculatorPage title="LCM Calculator" emoji="🔢" description="Find the Least Common Multiple of two or more numbers.">
+    <CalculatorPage 
+      title="LCM Calculator" 
+      emoji="🔢" 
+      description="Find the Least Common Multiple of two or more numbers."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Read the input field requirement, and enter 2 or more numbers separated by commas (e.g., 2, 4, 6).</li>
+          <li><strong>Step 2:</strong> Click <strong>Calculate LCM</strong>.</li>
+          <li><strong>Step 3:</strong> The calculator instantly computes and displays the Least Common Multiple for the numbers provided perfectly!</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="lcm-nums" label="Numbers (comma separated)" type="text"
           placeholder="e.g. 12, 18, 24" value={numsInput}

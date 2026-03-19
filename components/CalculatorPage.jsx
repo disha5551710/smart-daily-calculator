@@ -1,6 +1,6 @@
 'use client';
 
-export default function CalculatorPage({ title, emoji, description, children }) {
+export default function CalculatorPage({ title, emoji, description, instructions, children }) {
   return (
     <div style={{
       minHeight: '100vh',
@@ -59,6 +59,35 @@ export default function CalculatorPage({ title, emoji, description, children }) 
         }}>
           {children}
         </div>
+
+        {/* How to use */}
+        {instructions && (
+          <div style={{
+            marginTop: '2rem',
+            padding: '1.5rem',
+            backgroundColor: 'var(--color-bg-secondary)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 16,
+          }}>
+            <h3 style={{
+              marginTop: 0,
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontWeight: 700,
+              color: 'var(--color-text-heading)',
+              fontSize: '1.25rem',
+              marginBottom: '1rem'
+            }}>
+              How it works
+            </h3>
+            <div style={{
+              color: 'var(--color-text-body)',
+              fontSize: '0.95rem',
+              lineHeight: 1.6
+            }}>
+              {instructions}
+            </div>
+          </div>
+        )}
 
         {/* Ad Banner Bottom */}
         <div style={{

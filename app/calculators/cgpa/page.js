@@ -26,7 +26,19 @@ export default function CGPACalculator() {
   };
 
   return (
-    <CalculatorPage title="CGPA / Grade Calculator" emoji="🎓" description="Convert your CGPA to percentage and see your grade classification.">
+    <CalculatorPage 
+      title="CGPA Calculator" 
+      emoji="🎓" 
+      description="Quickly calculate your CGPA / GPA for the semester."
+      instructions={(
+        <ul style={{ paddingLeft: '1.5rem', margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <li><strong>Step 1:</strong> Enter the <strong>Credits</strong> and <strong>Grade / Points</strong> for your first subject.</li>
+          <li><strong>Step 2:</strong> Click <strong>+ Add Subject</strong> to add additional courses to your calculation.</li>
+          <li><strong>Step 3:</strong> Click <strong>Calculate CGPA</strong>.</li>
+          <li><strong>Step 4:</strong> Review your overall CGPA and the total total credits you have accumulated.</li>
+        </ul>
+      )}
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         <CalcInput id="cgpa-input" label="Your CGPA (out of 10)" placeholder="e.g. 8.5" value={cgpa}
           onChange={e => setCgpa(e.target.value)} min="0" step="0.01" />
